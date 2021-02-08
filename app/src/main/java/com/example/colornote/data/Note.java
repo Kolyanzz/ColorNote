@@ -1,9 +1,7 @@
-package com.example.colornote;
+package com.example.colornote.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.util.Calendar;
 
 public class Note implements Parcelable {
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -17,12 +15,12 @@ public class Note implements Parcelable {
             return new Note[size];
         }
     };
-    private final String title;
-    private final String content;
-    private final Calendar creationDate;
-    private final int color;
+    private String title;
+    private String content;
+    private String creationDate;
+    private int color;
 
-    public Note(String title, String content, Calendar creationDate, int color) {
+    public Note(String title, String content, String creationDate, int color) {
         this.title = title;
         this.content = content;
         this.creationDate = creationDate;
@@ -32,7 +30,7 @@ public class Note implements Parcelable {
     protected Note(Parcel in) {
         title = in.readString();
         content = in.readString();
-        creationDate = (Calendar) in.readSerializable();
+        creationDate = in.readString();
         color = in.readInt();
     }
 
@@ -40,7 +38,7 @@ public class Note implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(content);
-        dest.writeSerializable(creationDate);
+        dest.writeString(creationDate);
         dest.writeInt(color);
     }
 
@@ -53,15 +51,31 @@ public class Note implements Parcelable {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getContent() {
         return content;
     }
 
-    public Calendar getCreationDate() {
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getCreationDate() {
         return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 
     public int getColor() {
         return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }

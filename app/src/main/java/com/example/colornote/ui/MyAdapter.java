@@ -1,4 +1,4 @@
-package com.example.colornote;
+package com.example.colornote.ui;
 
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.colornote.R;
 import com.example.colornote.data.Note;
 import com.example.colornote.data.NotesSourceInterface;
 
@@ -21,13 +22,17 @@ import java.util.Locale;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private final Fragment fragment;
-    private final NotesSourceInterface dataSource;
+    private NotesSourceInterface dataSource;
     private MyClickListener myClickListener;
     private int menuPosition;
 
-    public MyAdapter(NotesSourceInterface dataSource, Fragment fragment) {
-        this.dataSource = dataSource;
+    public MyAdapter(Fragment fragment) {
         this.fragment = fragment;
+    }
+
+    public void setDataSource(NotesSourceInterface dataSource) {
+        this.dataSource = dataSource;
+        notifyDataSetChanged();
     }
 
     public int getMenuPosition() {

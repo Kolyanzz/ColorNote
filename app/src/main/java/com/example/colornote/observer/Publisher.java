@@ -1,7 +1,6 @@
-package com.example.colornote.data;
+package com.example.colornote.observer;
 
 import com.example.colornote.data.Note;
-import com.example.colornote.data.Observer;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.colornote.data;
+package com.example.colornote.observer;
 
 import com.example.colornote.data.Note;
 

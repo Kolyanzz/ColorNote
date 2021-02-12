@@ -1,8 +1,8 @@
 package com.example.colornote.data;
 
-import com.example.colornote.data.Note;
-
 public interface NotesSourceInterface {
+    NotesSourceInterface init(NotesSourceInterfaceResponse notesSourceInterfaceResponse);
+
     Note getNote(int position);
 
     int size();
@@ -12,4 +12,5 @@ public interface NotesSourceInterface {
     void changeNote(int position, Note note);
 
     void addNote(Note note);
+
 }

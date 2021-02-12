@@ -8,20 +8,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import com.example.colornote.data.Publisher;
+import com.example.colornote.observer.Publisher;
+import com.example.colornote.ui.ListOfNotesFragment;
 
-import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    private final FragmentManager fragmentManager = getSupportFragmentManager();
-    private final Fragment fragment = getVisibleFragment(fragmentManager);
 
-    private Navigation navigation;
     private final Publisher publisher = new Publisher();
+    private Navigation navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,28 +109,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, R.string.clear, Toast.LENGTH_SHORT).show();
             return true;
         });
-        if (fragment instanceof NoteFragment) {
-            search.setVisible(false);
-            sort.setVisible(false);
-            send.setVisible(true);
-            photo.setVisible(true);
-        } else if (fragment instanceof ListOfNotesFragment) {
-            search.setVisible(true);
-            sort.setVisible(true);
-            send.setVisible(false);
-            photo.setVisible(false);
-        }
         return true;
-    }
-
-    private Fragment getVisibleFragment(FragmentManager fragmentManager) {
-        List<Fragment> fragments = fragmentManager.getFragments();
-        int countFragments = fragments.size();
-        for (int i = countFragments - 1; i >= 0; i--) {
-            Fragment fragment = fragments.get(i);
-            if (fragment.isVisible())
-                return fragment;
-        }
-        return null;
     }
 }

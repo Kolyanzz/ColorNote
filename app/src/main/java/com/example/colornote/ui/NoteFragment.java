@@ -1,4 +1,4 @@
-package com.example.colornote;
+package com.example.colornote.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,8 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.colornote.MainActivity;
+import com.example.colornote.R;
 import com.example.colornote.data.Note;
-import com.example.colornote.data.Publisher;
+import com.example.colornote.observer.Publisher;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
@@ -112,10 +114,14 @@ public class NoteFragment extends Fragment {
     private Note collectNote() {
         String title = Objects.requireNonNull(this.titleText.getText()).toString();
         String content = Objects.requireNonNull(this.contentText.getText()).toString();
-        if (isNewNote) {
-            isNewNote = false;
+        if (note != null) {
+            Note answer;
+            answer = new Note(title, content, dateOfCreation, color);
+            answer.setId(note.getId());
+            return answer;
+        } else {
+            return new Note(title, content, dateOfCreation, color);
         }
-        return new Note(title, content, dateOfCreation, color);
     }
 
 

@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Note implements Parcelable {
+
+
     public static final Creator<Note> CREATOR = new Creator<Note>() {
         @Override
         public Note createFromParcel(Parcel in) {
@@ -15,6 +17,7 @@ public class Note implements Parcelable {
             return new Note[size];
         }
     };
+    private String id;
     private String title;
     private String content;
     private String creationDate;
@@ -77,5 +80,13 @@ public class Note implements Parcelable {
 
     public void setColor(int color) {
         this.color = color;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

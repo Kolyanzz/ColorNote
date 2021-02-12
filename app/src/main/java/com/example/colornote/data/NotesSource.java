@@ -13,17 +13,7 @@ import java.util.Collections;
 import java.util.Locale;
 
 public class NotesSource implements NotesSourceInterface, Parcelable {
-    public static final Creator<NotesSource> CREATOR = new Creator<NotesSource>() {
-        @Override
-        public NotesSource createFromParcel(Parcel in) {
-            return new NotesSource(in);
-        }
 
-        @Override
-        public NotesSource[] newArray(int size) {
-            return new NotesSource[size];
-        }
-    };
     private final ArrayList<Note> notes;
     private Resources resources;
     private int counter = 0;
@@ -46,8 +36,19 @@ public class NotesSource implements NotesSourceInterface, Parcelable {
     public int describeContents() {
         return 0;
     }
+    public static final Creator<NotesSource> CREATOR = new Creator<NotesSource>() {
+        @Override
+        public NotesSource createFromParcel(Parcel in) {
+            return new NotesSource(in);
+        }
 
-    public NotesSource init() {
+        @Override
+        public NotesSource[] newArray(int size) {
+            return new NotesSource[size];
+        }
+    };
+
+    public NotesSourceInterface init(NotesSourceInterfaceResponse notesSourceInterfaceResponse) {
         Note[] notesArray = new Note[]{
                 new Note(resources.getString(R.string.first_note_title),
                         resources.getString(R.string.first_note_content),
@@ -81,6 +82,9 @@ public class NotesSource implements NotesSourceInterface, Parcelable {
                         getDateOfCreation(), getColor()),
         };
         Collections.addAll(notes, notesArray);
+        if (notesSourceInterfaceResponse != null){
+            notesSourceInterfaceResponse.initialized(this);
+        }
         return this;
     }
 
@@ -108,6 +112,7 @@ public class NotesSource implements NotesSourceInterface, Parcelable {
     public void addNote(Note note) {
         notes.add(note);
     }
+
 
     public String getDateOfCreation() {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy",

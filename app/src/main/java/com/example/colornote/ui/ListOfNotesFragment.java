@@ -17,7 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.colornote.MainActivity;
+import com.example.colornote.MyBottomSheetDialogFragment;
 import com.example.colornote.Navigation;
+import com.example.colornote.OnDialogListener;
 import com.example.colornote.R;
 import com.example.colornote.data.Note;
 import com.example.colornote.data.NoteSoursceFirebaseImp;
@@ -133,11 +135,27 @@ public class ListOfNotesFragment extends Fragment {
         clearNote.setOnMenuItemClickListener(item -> {
             int position = adapter.getMenuPosition();
             if (item.getItemId() == R.id.clear) {
-                data.deleteNote(position);
-                adapter.notifyDataSetChanged();
+                //здесь добавим диалоговое окно
+                MyBottomSheetDialogFragment deleteDlgFragment = new MyBottomSheetDialogFragment();
+                deleteDlgFragment.setCancelable(false);
+                deleteDlgFragment.setOnDialogListener(new OnDialogListener() {
+                    @Override
+                    public void onDelete() {
+                        data.deleteNote(position);
+                        adapter.notifyItemRemoved(position);
+                        deleteDlgFragment.dismiss();
+                    }
+
+                    @Override
+                    public void onCancelDelete() {
+                        deleteDlgFragment.dismiss();
+                    }
+                });
+                deleteDlgFragment.show(requireActivity().getSupportFragmentManager(),
+                        "DeleteFragmentTag");
+                return true;
             }
-            return true;
+            return super.onContextItemSelected(item);
         });
-        super.onCreateOptionsMenu(menu, inflater);
     }
 }

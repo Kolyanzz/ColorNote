@@ -40,5 +40,8 @@
     <string name="clear">удалить</string>
     <string name="pereslat">переслать</string>
     <string name="foto">прикрепить фото</string>
+    <string name="dialog_delete_title">Вы действительно хотите удалить заметку?</string>
+    <string name="btnNo">Нет</string>
+    <string name="btnYes">Да</string>
 
 </resources>

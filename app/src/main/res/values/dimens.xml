@@ -10,4 +10,6 @@
     <dimen name="card_elevation">3dp</dimen>
     <dimen name="margin_for_save_button">300dp</dimen>
     <dimen name="land_margin_for_save_button">50dp</dimen>
+    <dimen name="layout_margin">20dp</dimen>
+    <dimen name="textSize">20sp</dimen>
 </resources>
